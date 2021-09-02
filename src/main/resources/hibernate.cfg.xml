@@ -23,6 +23,6 @@
         <!--        <mapping class="ru.eshmakar.manyToMany.HomeAddress"></mapping>-->
 
 
-        <mapping class="ru.eshmakar.getAllElements.Car"></mapping>
+        <mapping class="ru.eshmakar.Car"></mapping>
     </session-factory>
 </hibernate-configuration>

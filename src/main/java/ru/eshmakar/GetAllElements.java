@@ -1,14 +1,15 @@
-package ru.eshmakar.getAllElements;
+package ru.eshmakar;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import ru.eshmakar.Car;
 
 import java.util.List;
 
-public class Main {
+public class GetAllElements {
     public static void main(String[] args) {
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
         SessionFactory sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
@@ -16,8 +17,8 @@ public class Main {
         session.beginTransaction();
 
         //получаем список всех элементов и сохраняем все это в List
-        List from_car = session.createQuery("from Car").list();
-        System.out.println(from_car);
+        List<Car> cars = session.createQuery("from Car").list();
+        System.out.println(cars);
 
 
         session.getTransaction().commit();

@@ -1,4 +1,4 @@
-package ru.eshmakar.getAllElements;
+package ru.eshmakar;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
