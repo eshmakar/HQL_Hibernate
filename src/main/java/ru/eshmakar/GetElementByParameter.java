@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 import java.util.Date;
@@ -46,11 +47,19 @@ public class GetElementByParameter {
 //        session.createQuery("insert into Car (name) select c.name || '_added' from Car c where name = 'BMW'").executeUpdate();//вставка элемента (всегда используется select, || - означает добавить следующие символы после этого знака
 //        session.createQuery("delete from Car c where c.name ='BMW_added'").executeUpdate();//удаление элемента(-ов)
 
-        Query getById = session.createNamedQuery("getById");
-        getById.setParameter("id", 7);
+//        Query getById = session.createNamedQuery("getById");
+//        getById.setParameter("id", 7);
+//
+//        List list = getById.getResultList();
+//        list.forEach(System.out::println);
 
-        List list = getById.getResultList();
-        list.forEach(System.out::println);
+        //работа с чистым SQL
+        NativeQuery nativeQuery = session.createNativeQuery("select * from Car", Car.class);
+        List<Car> list = nativeQuery.getResultList();
+        for (Car c : list) {
+            System.out.printf("%d. %s%n", c.getId(), c.getName());
+        }
+
 
         session.getTransaction().commit();
         session.close();
