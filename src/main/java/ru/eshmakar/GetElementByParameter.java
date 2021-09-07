@@ -26,27 +26,31 @@ public class GetElementByParameter {
 //        Query query = session.createQuery("select bit_length(c.name) from Car c");//выводит битовую длину
 //        Query query = session.createQuery("select cast(c.name as integer ) from Car c");//переобразовать текст в int и т.д
 //        Query query = session.createQuery("select extract (year from current_timestamp) from Car");//получение года или дня(часы, минуты, секунды) из timestamp
-        Query query = session.createQuery("select str (current_timestamp) from Car");//переобразуем данные в String
-
-
-
+//        Query query = session.createQuery("select str (current_timestamp) from Car");//переобразуем данные в String
 
         //получаем список по параметрам и сохраняем все это в List
 //        List list = query.list();
 //        System.out.println(list);
 
+//        List<String> list = query.list();
+//        list.forEach(System.out::println);
+
         //либо получаем только один элемент
 
         //query.setParameter("name", "BMW");
 
-
-        List<String> list = query.list();
-        list.forEach(System.out::println);
-
-
         // Car car = (Car) query.uniqueResult();
         //System.out.println(car.getName());
 
+//        session.createQuery("update from Car set name = 'OOKAA' where name='OKA'").executeUpdate();//изменить значение в БД
+//        session.createQuery("insert into Car (name) select c.name || '_added' from Car c where name = 'BMW'").executeUpdate();//вставка элемента (всегда используется select, || - означает добавить следующие символы после этого знака
+//        session.createQuery("delete from Car c where c.name ='BMW_added'").executeUpdate();//удаление элемента(-ов)
+
+        Query getById = session.createNamedQuery("getById");
+        getById.setParameter("id", 7);
+
+        List list = getById.getResultList();
+        list.forEach(System.out::println);
 
         session.getTransaction().commit();
         session.close();
